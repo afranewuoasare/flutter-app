@@ -1,17 +1,19 @@
 import 'package:flutter/material.dart';
-import 'package:authapp/Comm/comHelper.dart';
-import 'package:authapp/Comm/genLoginSignupHeader.dart';
-import 'package:authapp/Comm/genTextFormField.dart';
-import 'package:authapp/DatabaseHandler/DbHelper.dart';
-import 'package:authapp/Model/UserModel.dart';
-import 'package:authapp/Screens/LoginForm.dart';
+import 'package:authapp/components/comHelper.dart';
+import 'package:authapp/components/genLoginSignupHeader.dart';
+import 'package:authapp/components/genTextFormField.dart';
+import 'package:authapp/database/DbHelper.dart';
+import 'package:authapp/models/user.dart';
+import 'package:authapp/Screens/login_form.dart';
 
-class SignupForm extends StatefulWidget {
+class CreateAccount extends StatefulWidget {
+  const CreateAccount({Key key}) : super(key: key);
+
   @override
-  _SignupFormState createState() => _SignupFormState();
+  _CreateAccountState createState() => _CreateAccountState();
 }
 
-class _SignupFormState extends State<SignupForm> {
+class _CreateAccountState extends State<CreateAccount> {
   final _formKey = new GlobalKey<FormState>();
 
   final _conUserId = TextEditingController();
@@ -46,7 +48,7 @@ class _SignupFormState extends State<SignupForm> {
           alertDialog(context, "Successfully Saved");
 
           Navigator.push(
-              context, MaterialPageRoute(builder: (_) => LoginForm()));
+              context, MaterialPageRoute(builder: (_) => const LoginForm()));
         }).catchError((error) {
           print(error);
           alertDialog(context, "Error: Data Save Fail");
@@ -59,7 +61,7 @@ class _SignupFormState extends State<SignupForm> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Login with Signup'),
+        title: const Text('Create an account'),
       ),
       body: Form(
         key: _formKey,
@@ -70,31 +72,27 @@ class _SignupFormState extends State<SignupForm> {
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  genLoginSignupHeader('Signup'),
-                  // getTextFormField(
-                  //     controller: _conUserId,
-                  //     icon: Icons.person,
-                  //     hintName: 'User ID'),
-                  SizedBox(height: 10.0),
+                  genLoginSignupHeader('Create account'),
+                  const SizedBox(height: 10.0),
                   getTextFormField(
                       controller: _conUserName,
                       icon: Icons.person_outline,
                       inputType: TextInputType.name,
                       hintName: 'User Name'),
-                  SizedBox(height: 10.0),
+                  const SizedBox(height: 10.0),
                   getTextFormField(
                       controller: _conEmail,
                       icon: Icons.email,
                       inputType: TextInputType.emailAddress,
                       hintName: 'Email'),
-                  SizedBox(height: 10.0),
+                  const SizedBox(height: 10.0),
                   getTextFormField(
                     controller: _conPassword,
                     icon: Icons.lock,
                     hintName: 'Password',
                     isObscureText: true,
                   ),
-                  SizedBox(height: 10.0),
+                  const SizedBox(height: 10.0),
                   getTextFormField(
                     controller: _conCPassword,
                     icon: Icons.lock,
@@ -102,17 +100,17 @@ class _SignupFormState extends State<SignupForm> {
                     isObscureText: true,
                   ),
                   Container(
-                    margin: EdgeInsets.all(30.0),
+                    margin: const EdgeInsets.all(30.0),
                     width: double.infinity,
                     child: FlatButton(
-                      child: Text(
-                        'Signup',
+                      child: const Text(
+                        'Create account',
                         style: TextStyle(color: Colors.white),
                       ),
                       onPressed: signUp,
                     ),
                     decoration: BoxDecoration(
-                      color: Colors.blue,
+                      color: Colors.green,
                       borderRadius: BorderRadius.circular(30.0),
                     ),
                   ),
@@ -120,14 +118,13 @@ class _SignupFormState extends State<SignupForm> {
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
-                        Text('Does you have account? '),
-                        FlatButton(
-                          textColor: Colors.blue,
-                          child: Text('Sign In'),
+                        const Text('Does you have account? '),
+                        ElevatedButton(
+                          child: const Text('Sign In', style: TextStyle(color: Colors.green)),
                           onPressed: () {
                             Navigator.pushAndRemoveUntil(
                                 context,
-                                MaterialPageRoute(builder: (_) => LoginForm()),
+                                MaterialPageRoute(builder: (_) => const LoginForm()),
                                 (Route<dynamic> route) => false);
                           },
                         )

@@ -1,4 +1,4 @@
-import 'package:authapp/Model/UserModel.dart';
+import 'package:authapp/models/user.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:sqflite/sqflite.dart';
 import 'package:path/path.dart';

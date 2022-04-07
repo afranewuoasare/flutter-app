@@ -1,17 +1,19 @@
 import 'package:flutter/material.dart';
-import 'package:authapp/Comm/comHelper.dart';
-import 'package:authapp/Comm/genTextFormField.dart';
-import 'package:authapp/DatabaseHandler/DbHelper.dart';
-import 'package:authapp/Model/UserModel.dart';
-import 'package:authapp/Screens/LoginForm.dart';
+import 'package:authapp/components/comHelper.dart';
+import 'package:authapp/components/genTextFormField.dart';
+import 'package:authapp/database/DbHelper.dart';
+import 'package:authapp/models/user.dart';
+import 'package:authapp/Screens/login_form.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-class HomeForm extends StatefulWidget {
+class HomePage extends StatefulWidget {
+  const HomePage({Key key}) : super(key: key);
+
   @override
-  _HomeFormState createState() => _HomeFormState();
+  _HomePageState createState() => _HomePageState();
 }
 
-class _HomeFormState extends State<HomeForm> {
+class _HomePageState extends State<HomePage> {
   final _formKey = new GlobalKey<FormState>();
   Future<SharedPreferences> _pref = SharedPreferences.getInstance();
 
@@ -59,7 +61,7 @@ class _HomeFormState extends State<HomeForm> {
           updateSP(user, true).whenComplete(() {
             Navigator.pushAndRemoveUntil(
                 context,
-                MaterialPageRoute(builder: (_) => LoginForm()),
+                MaterialPageRoute(builder: (_) => const LoginForm()),
                 (Route<dynamic> route) => false);
           });
         } else {
@@ -82,7 +84,7 @@ class _HomeFormState extends State<HomeForm> {
         updateSP(null, false).whenComplete(() {
           Navigator.pushAndRemoveUntil(
               context,
-              MaterialPageRoute(builder: (_) => LoginForm()),
+              MaterialPageRoute(builder: (_) => const LoginForm()),
               (Route<dynamic> route) => false);
         });
       }
@@ -108,14 +110,14 @@ class _HomeFormState extends State<HomeForm> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Home'),
+        title: const Text('Home'),
       ),
       body: Form(
         key: _formKey,
         child: SingleChildScrollView(
           scrollDirection: Axis.vertical,
           child: Container(
-            margin: EdgeInsets.only(top: 20.0),
+            margin: const EdgeInsets.only(top: 20.0),
             child: Center(
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
@@ -126,33 +128,33 @@ class _HomeFormState extends State<HomeForm> {
                       isEnable: false,
                       icon: Icons.person,
                       hintName: 'User ID'),
-                  SizedBox(height: 10.0),
+                  const SizedBox(height: 10.0),
                   getTextFormField(
                       controller: _conUserName,
                       icon: Icons.person_outline,
                       inputType: TextInputType.name,
                       hintName: 'User Name'),
-                  SizedBox(height: 10.0),
+                  const SizedBox(height: 10.0),
                   getTextFormField(
                       controller: _conEmail,
                       icon: Icons.email,
                       inputType: TextInputType.emailAddress,
                       hintName: 'Email'),
-                  SizedBox(height: 10.0),
+                  const SizedBox(height: 10.0),
                   getTextFormField(
                     controller: _conPassword,
                     icon: Icons.lock,
                     hintName: 'Password',
                     isObscureText: true,
                   ),
-                  SizedBox(height: 10.0),
+                  const SizedBox(height: 10.0),
                   Container(
-                    margin: EdgeInsets.all(30.0),
+                    margin: const EdgeInsets.all(30.0),
                     width: double.infinity,
-                    child: FlatButton(
-                      child: Text(
+                    child: ElevatedButton(
+                      child: const Text(
                         'Update',
-                        style: TextStyle(color: Colors.white),
+                        style: const TextStyle(color: Colors.white),
                       ),
                       onPressed: update,
                     ),
@@ -169,20 +171,20 @@ class _HomeFormState extends State<HomeForm> {
                       isEnable: false,
                       icon: Icons.person,
                       hintName: 'User ID'),
-                  SizedBox(height: 10.0),
-                  SizedBox(height: 10.0),
+                  const SizedBox(height: 10.0),
+                  const SizedBox(height: 10.0),
                   Container(
-                    margin: EdgeInsets.all(30.0),
+                    margin: const EdgeInsets.all(30.0),
                     width: double.infinity,
-                    child: FlatButton(
-                      child: Text(
+                    child: ElevatedButton(
+                      child: const Text(
                         'Delete',
                         style: TextStyle(color: Colors.white),
                       ),
                       onPressed: delete,
                     ),
                     decoration: BoxDecoration(
-                      color: Colors.blue,
+                      color: Colors.green,
                       borderRadius: BorderRadius.circular(30.0),
                     ),
                   ),
